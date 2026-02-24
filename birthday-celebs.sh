@@ -52,12 +52,12 @@ sections_json="$(
     --data-urlencode "format=json"
 )"
 
-birth_index="$(
-  echo "$sections_json" | jq -r '
-    .parse.sections[]
-    | select(.line=="Births")
-    | .index
-  ' | head -n1
+birth_lines="$(
+  printf '%s' "$births_html" \
+    | tr '\n' ' ' \
+    | sed -E 's/<li/\n<li/g' \
+    | grep -m "$TOP_N" -E '^<li' \
+    | strip_html_to_text
 )"
 
 [[ -n "$birth_index" && "$birth_index" != "null" ]] || die "Could not find 'Births' section for page: $PAGE"

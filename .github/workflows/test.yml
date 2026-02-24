@@ -37,6 +37,7 @@ jobs:
 
       - name: Run custom message script
         env: 
+          TOP_N: "1"
           ZULIP_ORGANIZATION_NAME: ${{ vars.ZULIP_ORGANIZATION_NAME }}
           MESSAGE_RECEIVER_USER_ID: ${{ secrets.MESSAGE_RECEIVER_USER_ID}}
           USER_API_KEY: ${{ secrets.USER_API_KEY }}
