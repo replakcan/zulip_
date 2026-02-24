@@ -33,7 +33,7 @@ jobs:
         run: echo Easy peasy, lemon squezy.
 
       - name: Make the script files executable
-        run: chomd +x my-script.sh
+        run: chmod +x my-script.sh
 
       - name: Run a custom script
         run: ./my-script.sh
