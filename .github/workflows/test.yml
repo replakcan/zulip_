@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Make the scripts executable
-        run: chmod +x my-script.sh curl-test.sh
+        run: chmod +x my-script.sh curl-test.sh birthday-celebs.sh
 
       - name: Run a custom script
         run: ./my-script.sh
