@@ -29,19 +29,27 @@ jobs:
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Install jq (if missing)
+        run: |
+          if ! command -v jq >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y jq
+          fi
+
       - name: Make the scripts executable
         run: chmod +x my-script.sh curl-test.sh birthday-celebs.sh
 
       - name: Run a custom script
         run: ./my-script.sh
 
-      - name: Run custom message script
+      - name: Send celebrity birthdays
         env: 
-          TOP_N: "1"
+          TOP_N: "5"
+          WIKI_TZ: "Europe/Istanbul"
           ZULIP_ORGANIZATION_NAME: ${{ vars.ZULIP_ORGANIZATION_NAME }}
-          MESSAGE_RECEIVER_USER_ID: ${{ secrets.MESSAGE_RECEIVER_USER_ID}}
-          USER_API_KEY: ${{ secrets.USER_API_KEY }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
+          USER_API_KEY: ${{ secrets.USER_API_KEY }}
+          MESSAGE_RECEIVER_USER_ID: ${{ secrets.MESSAGE_RECEIVER_USER_ID }}
         run: ./birthday-celebs.sh
 
       # Runs a set of commands using the runners shell
