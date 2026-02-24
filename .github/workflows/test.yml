@@ -5,7 +5,7 @@ name: zulip_workflow
 # Controls when the workflow will run
 on:
   schedule:
-    - cron: '*/5 * * * *'    
+    - cron: '*/10 * * * *'    
     
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
@@ -41,7 +41,7 @@ jobs:
           MESSAGE_RECEIVER_USER_ID: ${{ secrets.MESSAGE_RECEIVER_USER_ID}}
           USER_API_KEY: ${{ secrets.USER_API_KEY }}
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
-        run: ./curl-test.sh
+        run: ./birthday-celebs.sh
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
