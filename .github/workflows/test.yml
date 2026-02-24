@@ -4,6 +4,8 @@ name: zulip_workflow
 
 # Controls when the workflow will run
 on:
+  schedule:
+      - cron: "1 * * * *"
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
@@ -25,13 +27,6 @@ jobs:
     steps:      
         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      - name: Run a one-line second script
-        run: echo Easy peasy, lemon squezy.
 
       - name: Make the scripts executable
         run: chmod +x my-script.sh curl-test.sh
